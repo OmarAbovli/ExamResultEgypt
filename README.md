@@ -76,9 +76,9 @@ NODE_ENV = production
    - اذهب إلى [Google AdSense](https://www.google.com/adsense/)
    - قدم طلب للموافقة على موقعك
 
-2. **تحديث رموز الإعلانات**
-   - في `client/index.html`: استبدل `ca-pub-XXXXXXXXXX`
-   - في `client/src/components/AdSense.tsx`: استبدل أرقام الإعلانات
+2. **✅ رقم AdSense محدث بالفعل**
+   - الموقع يستخدم الآن: `ca-pub-4994973818889629`
+   - تحتاج فقط لإنشاء ad units في حساب AdSense وتحديث الأرقام
 
 3. **أماكن الإعلانات**
    - إعلان بانر علوي: 728x90

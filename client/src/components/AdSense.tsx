@@ -44,7 +44,7 @@ export default function AdSense({
           width: width ? `${width}px` : "100%",
           height: height ? `${height}px` : "auto",
         }}
-        data-ad-client="ca-pub-XXXXXXXXXX" // سيتم استبداله برقمك
+        data-ad-client="ca-pub-4994973818889629"
         data-ad-slot={adSlot}
         data-ad-format={adFormat}
         data-full-width-responsive="true"
