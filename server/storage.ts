@@ -17,33 +17,58 @@ let pool: pg.Pool | null = null;
 
 async function initializeDatabase() {
   try {
-    if (process.env.DATABASE_URL) {
-      console.log("Connecting to database with pg...");
-      
-      // Parse the DATABASE_URL to create proper connection config
-      const connectionString = process.env.DATABASE_URL;
-      pool = new pg.Pool({
-        connectionString,
-        ssl: { rejectUnauthorized: false }
-      });
-      
-      db = drizzlePg(pool);
-      console.log("Database connection successful");
-      
-      // Test the connection and create tables if they don't exist
-      await pool.query(`CREATE TABLE IF NOT EXISTS exam_results (
-        id VARCHAR PRIMARY KEY DEFAULT gen_random_uuid(),
-        full_name TEXT NOT NULL,
-        seat_number TEXT NOT NULL,
-        score DECIMAL(5,2) NOT NULL,
-        created_at TIMESTAMP DEFAULT NOW() NOT NULL
-      );`);
-      console.log("Database tables initialized");
+    // First try to connect using Supabase-compatible connection
+    const supabaseUrl = "postgresql://postgres:Qwer%4004034550590103321153201551978306%23@db.ptiwmmowijyhxdjnewel.supabase.co:5432/postgres";
+    console.log("Connecting to Supabase database...");
+    
+    pool = new pg.Pool({
+      connectionString: supabaseUrl,
+      ssl: { rejectUnauthorized: false }
+    });
+    
+    db = drizzlePg(pool);
+    
+    // Test the connection and create tables
+    await pool.query(`CREATE TABLE IF NOT EXISTS exam_results (
+      id VARCHAR PRIMARY KEY DEFAULT gen_random_uuid(),
+      full_name TEXT NOT NULL,
+      seat_number TEXT NOT NULL,
+      score DECIMAL(5,2) NOT NULL,
+      created_at TIMESTAMP DEFAULT NOW() NOT NULL
+    );`);
+    
+    console.log("Supabase database connection successful");
+    console.log("Database tables initialized");
+  } catch (supabaseError) {
+    console.log("Supabase connection failed, trying Replit database...");
+    
+    // Fallback to Replit database
+    try {
+      if (process.env.DATABASE_URL) {
+        const connectionString = process.env.DATABASE_URL;
+        pool = new pg.Pool({
+          connectionString,
+          ssl: { rejectUnauthorized: false }
+        });
+        
+        db = drizzlePg(pool);
+        
+        await pool.query(`CREATE TABLE IF NOT EXISTS exam_results (
+          id VARCHAR PRIMARY KEY DEFAULT gen_random_uuid(),
+          full_name TEXT NOT NULL,
+          seat_number TEXT NOT NULL,
+          score DECIMAL(5,2) NOT NULL,
+          created_at TIMESTAMP DEFAULT NOW() NOT NULL
+        );`);
+        
+        console.log("Replit database connection successful");
+        console.log("Database tables initialized");
+      }
+    } catch (replitError) {
+      console.error("Both database connections failed:", { supabaseError, replitError });
+      db = null;
+      pool = null;
     }
-  } catch (error) {
-    console.error("Database connection failed:", error);
-    db = null;
-    pool = null;
   }
 }
 

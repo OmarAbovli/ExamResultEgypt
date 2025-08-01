@@ -43,7 +43,7 @@ Preferred communication style: Simple, everyday language.
 
 ### Database Schema
 
-**Database**: PostgreSQL hosted on Replit (not Supabase)
+**Database**: PostgreSQL hosted on Supabase (with Replit fallback)
 **Tables**:
 - `exam_results`: Stores exam results with UUID primary keys, full name, seat number, decimal score, and timestamps
 
