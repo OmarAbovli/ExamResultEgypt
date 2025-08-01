@@ -100,4 +100,4 @@ Preferred communication style: Simple, everyday language.
 - **clsx & class-variance-authority**: Conditional CSS class management
 - **nanoid**: ID generation utility
 
-The system is designed for easy deployment on Replit with proper development tooling and can be easily migrated to use a real PostgreSQL database by switching the storage implementation from in-memory to the configured Drizzle ORM setup.
+The system is designed for dual deployment: development on Replit and production on Vercel using serverless functions. The architecture supports seamless database connectivity across platforms with Supabase as primary storage and automatic fallback mechanisms.

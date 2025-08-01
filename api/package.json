@@ -1,0 +1,12 @@
+{
+  "name": "egyptian-exam-results-api",
+  "version": "1.0.0",
+  "type": "module",
+  "dependencies": {
+    "express": "^4.21.1",
+    "zod": "^3.24.1",
+    "pg": "^8.13.1",
+    "drizzle-orm": "^0.37.0",
+    "drizzle-zod": "^0.5.1"
+  }
+}
