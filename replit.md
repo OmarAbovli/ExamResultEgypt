@@ -82,9 +82,12 @@ Preferred communication style: Simple, everyday language.
 - **Lucide React**: Icon library
 
 ### Advertisement Integration
-- **Google AdSense**: Integrated advertisement system with three strategic placements
-- **Custom AdSense Components**: Reusable React components for different ad formats
-- **Ad Placement Strategy**: Top banner (728x90), sidebar (300x250), bottom banner (728x90)
+- **Google AdSense**: Real integration with publisher ID ca-pub-4994973818889629
+- **Live Ad Units**: Three production-ready ad slots configured
+  - Top Banner: 2979454262 (Auto format)
+  - Sidebar: 5556450486 (In-article fluid)
+  - Bottom Banner: 8300881944 (Fluid layout with custom key)
+- **Custom AdSense Components**: Reusable React components supporting all AdSense formats
 
 ### State Management & Data Fetching
 - **TanStack Query**: Server state management and caching

@@ -15,25 +15,17 @@
    - **Size**: 728 x 90 (Leaderboard)
    - **Ad type**: Display ads
 3. اضغط **Create**
-4. انسخ الرقم من الكود واستبدل `"1234567890"` في AdSense.tsx
+4. ✅ **تم التحديث بالفعل**: `"2979454262"`
 
-#### ب) الإعلان الجانبي (Sidebar)
-1. اختر **Ads** > **By ad unit** > **Display ads**
-2. أدخل:
-   - **Name**: "Egyptian Exam Results - Sidebar"
-   - **Size**: 300 x 250 (Medium Rectangle)
-   - **Ad type**: Display ads
-3. اضغط **Create**
-4. انسخ الرقم من الكود واستبدل `"2345678901"` في AdSense.tsx
+#### ب) الإعلان الجانبي (In-Article)
+1. ✅ **تم الإعداد**: `"5556450486"`
+2. النوع: In-Article Fluid
+3. الإعدادات: `data-ad-format="fluid"` و `data-ad-layout="in-article"`
 
-#### ج) الإعلان السفلي (Bottom Banner)
-1. اختر **Ads** > **By ad unit** > **Display ads**
-2. أدخل:
-   - **Name**: "Egyptian Exam Results - Bottom Banner"
-   - **Size**: 728 x 90 (Leaderboard)
-   - **Ad type**: Display ads
-3. اضغط **Create**
-4. انسخ الرقم من الكود واستبدل `"3456789012"` في AdSense.tsx
+#### ج) الإعلان السفلي (Fluid Layout)
+1. ✅ **تم الإعداد**: `"8300881944"`
+2. النوع: Fluid Layout
+3. الإعدادات: `data-ad-format="fluid"` و `data-ad-layout-key="-fb+5w+4e-db+86"`
 
 ### 3. كيفية العثور على رقم Ad Unit
 
@@ -46,43 +38,42 @@
      data-ad-format="auto"></ins>
 ```
 
-### 4. تحديث الأرقام في الكود
+### 4. ✅ تم تحديث الأرقام في الكود
 
-في ملف `client/src/components/AdSense.tsx`:
+الكود الحالي في `client/src/components/AdSense.tsx`:
 
 ```typescript
-// مكون للإعلان البانر العلوي (728x90)
+// مكون للإعلان العلوي (Auto Format)
 export function TopBannerAd() {
   return (
     <AdSense
-      adSlot="رقم_الإعلان_العلوي_هنا" // استبدل هذا
-      width={728}
-      height={90}
-      className="mx-auto"
+      adSlot="2979454262" // ✅ محدث
+      adFormat="auto"
+      className="mx-auto block"
     />
   );
 }
 
-// مكون للإعلان الجانبي (300x250)
+// مكون للإعلان الجانبي (In-Article)
 export function SidebarAd() {
   return (
     <AdSense
-      adSlot="رقم_الإعلان_الجانبي_هنا" // استبدل هذا
-      width={300}
-      height={250}
-      className="mx-auto"
+      adSlot="5556450486" // ✅ محدث
+      adFormat="fluid"
+      adLayout="in-article"
+      className="mx-auto block text-center"
     />
   );
 }
 
-// مكون للإعلان السفلي (728x90)
+// مكون للإعلان السفلي (Fluid Layout)
 export function BottomBannerAd() {
   return (
     <AdSense
-      adSlot="رقم_الإعلان_السفلي_هنا" // استبدل هذا
-      width={728}
-      height={90}
-      className="mx-auto"
+      adSlot="8300881944" // ✅ محدث
+      adFormat="fluid"
+      adLayoutKey="-fb+5w+4e-db+86"
+      className="mx-auto block"
     />
   );
 }

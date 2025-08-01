@@ -3,6 +3,8 @@ import { useEffect } from "react";
 interface AdSenseProps {
   adSlot: string;
   adFormat?: string;
+  adLayout?: string;
+  adLayoutKey?: string;
   width?: number;
   height?: number;
   className?: string;
@@ -16,7 +18,9 @@ declare global {
 
 export default function AdSense({ 
   adSlot, 
-  adFormat = "auto", 
+  adFormat = "auto",
+  adLayout,
+  adLayoutKey,
   width, 
   height, 
   className = "" 
@@ -47,44 +51,45 @@ export default function AdSense({
         data-ad-client="ca-pub-4994973818889629"
         data-ad-slot={adSlot}
         data-ad-format={adFormat}
+        {...(adLayout && { "data-ad-layout": adLayout })}
+        {...(adLayoutKey && { "data-ad-layout-key": adLayoutKey })}
         data-full-width-responsive="true"
       />
     </div>
   );
 }
 
-// مكون للإعلان البانر العلوي (728x90)
+// مكون للإعلان العلوي (Auto Format)
 export function TopBannerAd() {
   return (
     <AdSense
-      adSlot="1234567890" // يجب استبداله برقم الإعلان الحقيقي
-      width={728}
-      height={90}
-      className="mx-auto"
+      adSlot="2979454262"
+      adFormat="auto"
+      className="mx-auto block"
     />
   );
 }
 
-// مكون للإعلان الجانبي (300x250)
+// مكون للإعلان الجانبي (In-Article)
 export function SidebarAd() {
   return (
     <AdSense
-      adSlot="2345678901" // يجب استبداله برقم الإعلان الحقيقي
-      width={300}
-      height={250}
-      className="mx-auto"
+      adSlot="5556450486"
+      adFormat="fluid"
+      adLayout="in-article"
+      className="mx-auto block text-center"
     />
   );
 }
 
-// مكون للإعلان السفلي (728x90)
+// مكون للإعلان السفلي (Fluid Layout)
 export function BottomBannerAd() {
   return (
     <AdSense
-      adSlot="3456789012" // يجب استبداله برقم الإعلان الحقيقي
-      width={728}
-      height={90}
-      className="mx-auto"
+      adSlot="8300881944"
+      adFormat="fluid"
+      adLayoutKey="-fb+5w+4e-db+86"
+      className="mx-auto block"
     />
   );
 }
