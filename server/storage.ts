@@ -3,6 +3,8 @@ import { neon } from "@neondatabase/serverless";
 import { drizzle } from "drizzle-orm/neon-http";
 import { eq, or } from "drizzle-orm";
 import { randomUUID } from "crypto";
+import pg from "pg";
+import { drizzle as drizzlePg } from "drizzle-orm/node-postgres";
 
 export interface IStorage {
   getExamResult(fullName: string, seatNumber: string): Promise<ExamResult | undefined>;
@@ -11,28 +13,37 @@ export interface IStorage {
 
 // Database connection with error handling
 let db: any = null;
-let sql: any = null;
+let pool: pg.Pool | null = null;
 
 async function initializeDatabase() {
   try {
     if (process.env.DATABASE_URL) {
-      console.log("Connecting to database...");
-      sql = neon(process.env.DATABASE_URL);
-      db = drizzle(sql);
+      console.log("Connecting to database with pg...");
+      
+      // Parse the DATABASE_URL to create proper connection config
+      const connectionString = process.env.DATABASE_URL;
+      pool = new pg.Pool({
+        connectionString,
+        ssl: { rejectUnauthorized: false }
+      });
+      
+      db = drizzlePg(pool);
       console.log("Database connection successful");
       
-      // Create tables if they don't exist
-      await sql`CREATE TABLE IF NOT EXISTS exam_results (
+      // Test the connection and create tables if they don't exist
+      await pool.query(`CREATE TABLE IF NOT EXISTS exam_results (
         id VARCHAR PRIMARY KEY DEFAULT gen_random_uuid(),
         full_name TEXT NOT NULL,
         seat_number TEXT NOT NULL,
         score DECIMAL(5,2) NOT NULL,
         created_at TIMESTAMP DEFAULT NOW() NOT NULL
-      );`;
+      );`);
       console.log("Database tables initialized");
     }
   } catch (error) {
-    console.error("Database connection failed, falling back to in-memory storage:", error);
+    console.error("Database connection failed:", error);
+    db = null;
+    pool = null;
   }
 }
 
@@ -100,6 +111,33 @@ export class MemStorage implements IStorage {
   }
 }
 
-// Always use memory storage for now until database connection is stable
-export const storage = new MemStorage();
-console.log("Using MemStorage as primary storage");
+// Create a hybrid storage that handles database connection issues gracefully
+class HybridStorage implements IStorage {
+  private memStorage = new MemStorage();
+  private dbStorage = new DatabaseStorage();
+
+  async getExamResult(fullName: string, seatNumber: string): Promise<ExamResult | undefined> {
+    try {
+      if (db) {
+        return await this.dbStorage.getExamResult(fullName, seatNumber);
+      }
+    } catch (error) {
+      console.log("Database query failed, using memory storage");
+    }
+    return await this.memStorage.getExamResult(fullName, seatNumber);
+  }
+
+  async createExamResult(result: InsertExamResult): Promise<ExamResult> {
+    try {
+      if (db) {
+        return await this.dbStorage.createExamResult(result);
+      }
+    } catch (error) {
+      console.log("Database insert failed, using memory storage");
+    }
+    return await this.memStorage.createExamResult(result);
+  }
+}
+
+export const storage = new HybridStorage();
+console.log("Using HybridStorage (database preferred, memory fallback)");

@@ -88,7 +88,7 @@ export default function Home() {
                 <h1 className="text-3xl font-bold text-egyptian-blue mb-2">
                   نتيجة الثانوية العامة بمصر لعام {currentYear}
                 </h1>
-                <p className="text-gray-600">وزارة التربية والتعليم والتعليم الفني</p>
+                <p className="text-gray-600">وزارة التربية والتعليم</p>
               </div>
             </div>
             <p className="text-lg text-egyptian-green font-medium">
@@ -285,7 +285,7 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="bg-egyptian-blue text-white text-center py-6 mt-8">
-        <p className="mb-2">© {currentYear} وزارة التربية والتعليم والتعليم الفني - جمهورية مصر العربية</p>
+        <p className="mb-2">© {currentYear} وزارة التربية والتعليم - جمهورية مصر العربية</p>
         <p className="text-sm opacity-75">جميع الحقوق محفوظة</p>
       </footer>
     </div>
