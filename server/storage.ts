@@ -16,13 +16,8 @@ let sql: any = null;
 async function initializeDatabase() {
   try {
     if (process.env.DATABASE_URL) {
-      // Manually construct the correct database URL with encoded password
-      const password = "Qwer@04034550590103321153201551978306#";
-      const encodedPassword = encodeURIComponent(password);
-      const cleanUrl = `postgresql://postgres:${encodedPassword}@db.ptiwmmowijyhxdjnewel.supabase.co:5432/postgres`;
-      
       console.log("Connecting to database...");
-      sql = neon(cleanUrl);
+      sql = neon(process.env.DATABASE_URL);
       db = drizzle(sql);
       console.log("Database connection successful");
       

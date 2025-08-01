@@ -1,8 +1,8 @@
-# Exam Results System
+# Egyptian High School Exam Results Website
 
 ## Overview
 
-This is a full-stack exam results lookup system built with React frontend and Express backend. The application is designed for Arabic-language users to query exam results by entering their full name and seat number. The system generates random scores for demonstration purposes and displays results in an Arabic-formatted interface with proper grading classifications.
+This is a satirical Egyptian high school exam results website built with React frontend and Express backend. The application features a fully Arabic interface where users can look up exam results by entering their الاسم الرباعي (full name) and رقم الجلوس (seat number). The system generates random scores between 50-95% for demonstration purposes and displays results with proper Arabic grading classifications (مقبول، جيد، جيد جداً، ممتاز). The website includes ad space placeholders for Google AdSense integration and automatically displays the current year in the title.
 
 ## User Preferences
 
