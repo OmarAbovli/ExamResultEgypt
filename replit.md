@@ -10,36 +10,26 @@ Preferred communication style: Simple, everyday language.
 
 ## System Architecture
 
-### Frontend Architecture
+### Unified Full-Stack Architecture
 
-**Framework**: React with TypeScript using Vite as the build tool
+**Frontend**: React with TypeScript using Vite as the build tool
 - **UI Library**: Shadcn/ui components built on top of Radix UI primitives
 - **Styling**: Tailwind CSS with custom CSS variables for theming
-- **State Management**: React Hook Form for form handling, TanStack Query for server state
+- **State Management**: React Hook Form for form handling, direct API calls
 - **Routing**: Wouter for client-side routing
 - **Internationalization**: Arabic language support with custom date formatting utilities
 
-**Key Design Decisions**:
-- Component-based architecture with reusable UI components
-- Form validation using Zod schemas for type safety
-- Responsive design with mobile-first approach
-- Toast notifications for user feedback
-- Custom Arabic date and grading utilities
-
-### Backend Architecture
-
-**Framework**: Express.js with TypeScript
-- **Database ORM**: Drizzle ORM configured for PostgreSQL
-- **Development Setup**: Vite integration for hot reloading in development
-- **API Design**: RESTful endpoints with proper error handling
-- **Data Storage**: In-memory storage implementation with interface for easy database migration
+**Backend**: Serverless Functions (Vercel/Netlify compatible)
+- **API**: Single endpoint `/api/search` for exam result queries
+- **Database**: Supabase PostgreSQL with fallback to random generation
+- **Deployment**: Optimized for Vercel with simple configuration
 
 **Key Design Decisions**:
-- Clean separation between storage interface and implementation
-- Request/response logging middleware for debugging
-- Zod validation for API input validation
-- Error handling middleware with proper HTTP status codes
-- Development-friendly setup with automatic reloading
+- Simplified unified project structure for easy deployment
+- Direct API calls instead of complex middleware
+- Single serverless function handles all backend logic
+- Minimal dependencies for faster builds
+- Production-ready Google AdSense integration
 
 ### Database Schema
 

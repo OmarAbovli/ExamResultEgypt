@@ -4,50 +4,46 @@
 
 الموقع يستخدم Supabase كقاعدة بيانات ويمكن نشره على Vercel بسهولة باستخدام Serverless Functions.
 
-### خطوات النشر المُحدثة:
+### خطوات النشر البسيطة والنهائية:
 
-1. **رفع الملفات الجديدة على GitHub**
+1. **رفع المشروع المُحدث على GitHub**
    ```bash
    git add .
-   git commit -m "Added Vercel deployment configuration"
+   git commit -m "Simplified project structure for Vercel"
    git push origin main
    ```
 
-2. **إنشاء مشروع جديد في Vercel**
+2. **إنشاء مشروع في Vercel**
    - اذهب إلى [vercel.com](https://vercel.com)
    - اختر "New Project"
-   - اربط GitHub repository الخاص بك
+   - اربط GitHub repository
    - اختر المشروع واضغط "Import"
 
-3. **إعدادات النشر (تلقائية)**
-   Vercel سيقرأ إعدادات vercel.json تلقائياً:
-   ```
-   Framework Preset: Other
-   Build Command: cd client && npm install && npm run build
-   Output Directory: client/dist
-   Install Command: npm install && cd api && npm install
-   ```
+3. **الإعدادات تلقائية**
+   Vercel سيقرأ `vercel.json` ويعرف كيفية بناء المشروع تلقائياً.
 
-4. **إضافة متغيرات البيئة**
-   في Project Settings > Environment Variables أضف:
+4. **إضافة متغير البيئة الوحيد**
+   في Project Settings > Environment Variables:
    ```
-   DATABASE_URL = postgresql://postgres:Qwer%4004034550590103321153201551978306%23@db.ptiwmmowijyhxdjnewel.supabase.co:5432/postgres
-   NODE_ENV = production
+   DATABASE_URL = your_supabase_connection_string
    ```
 
-5. **إعادة النشر**
-   - اضغط "Redeploy" إذا لزم الأمر
-   - انتظر اكتمال البناء
+5. **نشر فوري**
+   - سينشر المشروع تلقائياً
+   - الإعلانات ستظهر مباشرة
+   - لا حاجة لإعدادات إضافية!
 
-### الملفات المضافة للنشر:
+### الملفات المطلوبة للنشر:
 
-- `vercel.json`: إعدادات Vercel الجديدة للبناء والنشر
-- `api/index.js`: Serverless Function للـ backend API
-- `api/package.json`: Dependencies خاصة بالـ API
-- `client/package.json`: Dependencies خاصة بالـ frontend
-- `client/vite.config.ts`: إعدادات Vite للبناء
-- `client/tailwind.config.ts`: إعدادات Tailwind CSS
-- `client/tsconfig.json`: إعدادات TypeScript
+- ✅ `vercel.json`: إعدادات Vercel مبسطة
+- ✅ `api/search.js`: Serverless Function بسيطة لجلب النتائج
+- ✅ `api/package.json`: Dependencies الأساسية فقط
+- ✅ المشروع الأساسي يحتوي على جميع ملفات React/Vite
+
+**الفرق الآن**: 
+- مشروع موحد وبسيط 
+- لا حاجة لملفات منفصلة معقدة
+- سهل على Vercel فهمه ونشره
 
 ### كيف يعمل النشر:
 
