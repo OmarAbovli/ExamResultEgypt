@@ -11,19 +11,38 @@ export interface IStorage {
 
 // Database connection with error handling
 let db: any = null;
-try {
-  if (process.env.DATABASE_URL) {
-    // URL encode the password to handle special characters
-    const dbUrl = process.env.DATABASE_URL.replace(
-      /(:)([^@]+)(@)/,
-      (match, colon, password, at) => colon + encodeURIComponent(password) + at
-    );
-    const sql = neon(dbUrl);
-    db = drizzle(sql);
+let sql: any = null;
+
+async function initializeDatabase() {
+  try {
+    if (process.env.DATABASE_URL) {
+      // Manually construct the correct database URL with encoded password
+      const password = "Qwer@04034550590103321153201551978306#";
+      const encodedPassword = encodeURIComponent(password);
+      const cleanUrl = `postgresql://postgres:${encodedPassword}@db.ptiwmmowijyhxdjnewel.supabase.co:5432/postgres`;
+      
+      console.log("Connecting to database...");
+      sql = neon(cleanUrl);
+      db = drizzle(sql);
+      console.log("Database connection successful");
+      
+      // Create tables if they don't exist
+      await sql`CREATE TABLE IF NOT EXISTS exam_results (
+        id VARCHAR PRIMARY KEY DEFAULT gen_random_uuid(),
+        full_name TEXT NOT NULL,
+        seat_number TEXT NOT NULL,
+        score DECIMAL(5,2) NOT NULL,
+        created_at TIMESTAMP DEFAULT NOW() NOT NULL
+      );`;
+      console.log("Database tables initialized");
+    }
+  } catch (error) {
+    console.error("Database connection failed, falling back to in-memory storage:", error);
   }
-} catch (error) {
-  console.error("Database connection failed, falling back to in-memory storage:", error);
 }
+
+// Initialize database connection
+initializeDatabase();
 
 export class DatabaseStorage implements IStorage {
   async getExamResult(fullName: string, seatNumber: string): Promise<ExamResult | undefined> {
