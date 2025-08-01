@@ -74,12 +74,16 @@ export class MemStorage implements IStorage {
 
   constructor() {
     this.examResults = new Map();
+    console.log("MemStorage initialized");
   }
 
   async getExamResult(fullName: string, seatNumber: string): Promise<ExamResult | undefined> {
-    return Array.from(this.examResults.values()).find(
+    const found = Array.from(this.examResults.values()).find(
       (result) => result.fullName === fullName || result.seatNumber === seatNumber,
     );
+    console.log(`MemStorage: Searching for ${fullName} or ${seatNumber}, found:`, found ? "Yes" : "No");
+    console.log("MemStorage: Current stored results:", this.examResults.size);
+    return found;
   }
 
   async createExamResult(insertResult: InsertExamResult): Promise<ExamResult> {
@@ -90,6 +94,8 @@ export class MemStorage implements IStorage {
       createdAt: new Date()
     };
     this.examResults.set(id, result);
+    console.log(`MemStorage: Created new result for ${result.fullName} with score ${result.score}`);
+    console.log("MemStorage: Total stored results:", this.examResults.size);
     return result;
   }
 }
