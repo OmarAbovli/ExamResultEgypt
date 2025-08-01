@@ -11,6 +11,7 @@ import { Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { submitExamQuery } from "@/lib/supabase";
 import { getArabicDate, getCurrentYear, getGradeInArabic, getGradeColor } from "@/lib/arabic-dates";
+import { TopBannerAd, SidebarAd, BottomBannerAd } from "@/components/AdSense";
 import type { ExamResult } from "@shared/schema";
 
 const examQuerySchema = z.object({
@@ -70,9 +71,7 @@ export default function Home() {
       <div className="w-full bg-gray-100 border-b border-gray-200 p-4 text-center">
         <div className="max-w-4xl mx-auto">
           <p className="text-sm text-gray-500 mb-2">مساحة إعلانية</p>
-          <div className="bg-white border-2 border-dashed border-gray-300 h-24 flex items-center justify-center">
-            <span className="text-gray-400 text-sm">Google AdSense Code Here (728x90)</span>
-          </div>
+          <TopBannerAd />
         </div>
       </div>
 
@@ -169,11 +168,7 @@ export default function Home() {
             <Card className="shadow-md">
               <CardContent className="p-4">
                 <p className="text-sm text-gray-500 mb-2 text-center">مساحة إعلانية</p>
-                <div className="bg-gray-100 border-2 border-dashed border-gray-300 h-64 flex items-center justify-center">
-                  <span className="text-gray-400 text-sm text-center">
-                    Google AdSense Code Here<br/>(300x250)
-                  </span>
-                </div>
+                <SidebarAd />
               </CardContent>
             </Card>
 
@@ -277,9 +272,7 @@ export default function Home() {
       <div className="w-full bg-gray-100 border-t border-gray-200 p-4 text-center mt-8">
         <div className="max-w-4xl mx-auto">
           <p className="text-sm text-gray-500 mb-2">مساحة إعلانية</p>
-          <div className="bg-white border-2 border-dashed border-gray-300 h-24 flex items-center justify-center">
-            <span className="text-gray-400 text-sm">Google AdSense Code Here (728x90)</span>
-          </div>
+          <BottomBannerAd />
         </div>
       </div>
 

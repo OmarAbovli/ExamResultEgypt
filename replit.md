@@ -2,7 +2,7 @@
 
 ## Overview
 
-This is a satirical Egyptian high school exam results website built with React frontend and Express backend. The application features a fully Arabic interface where users can look up exam results by entering their الاسم الرباعي (full name) and رقم الجلوس (seat number). The system generates random scores between 50-95% for demonstration purposes and displays results with proper Arabic grading classifications (مقبول، جيد، جيد جداً، ممتاز). The website includes ad space placeholders for Google AdSense integration and automatically displays the current year in the title.
+This is a satirical Egyptian high school exam results website built with React frontend and Express backend. The application features a fully Arabic interface where users can look up exam results by entering their الاسم الرباعي (full name) and رقم الجلوس (seat number). The system generates random scores between 50-95% for demonstration purposes and displays results with proper Arabic grading classifications (مقبول، جيد، جيد جداً، ممتاز). The website includes integrated Google AdSense advertisements in three strategic locations and automatically displays the current year in the title.
 
 ## User Preferences
 
@@ -80,6 +80,11 @@ Preferred communication style: Simple, everyday language.
 - **Radix UI**: Headless UI components for accessibility
 - **Shadcn/ui**: Pre-built component library
 - **Lucide React**: Icon library
+
+### Advertisement Integration
+- **Google AdSense**: Integrated advertisement system with three strategic placements
+- **Custom AdSense Components**: Reusable React components for different ad formats
+- **Ad Placement Strategy**: Top banner (728x90), sidebar (300x250), bottom banner (728x90)
 
 ### State Management & Data Fetching
 - **TanStack Query**: Server state management and caching
