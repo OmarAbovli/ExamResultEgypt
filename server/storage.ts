@@ -100,5 +100,6 @@ export class MemStorage implements IStorage {
   }
 }
 
-// Use database storage if available, otherwise fallback to memory storage
-export const storage = db ? new DatabaseStorage() : new MemStorage();
+// Always use memory storage for now until database connection is stable
+export const storage = new MemStorage();
+console.log("Using MemStorage as primary storage");
