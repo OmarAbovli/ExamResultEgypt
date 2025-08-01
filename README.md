@@ -29,7 +29,7 @@
 
 1. **تنزيل المشروع**
    ```bash
-   git clone <your-repo-url>
+   git clone https://github.com/OmarAbovli/ExamResultEgypt.git
    cd egyptian-exam-results
    ```
 
