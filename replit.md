@@ -43,15 +43,16 @@ Preferred communication style: Simple, everyday language.
 
 ### Database Schema
 
+**Database**: PostgreSQL hosted on Replit (not Supabase)
 **Tables**:
 - `exam_results`: Stores exam results with UUID primary keys, full name, seat number, decimal score, and timestamps
-- `users`: Basic user authentication schema (prepared for future use)
 
 **Design Patterns**:
 - UUID primary keys for better scalability
-- Decimal precision for score storage
+- Decimal precision for score storage (5,2)
 - Automatic timestamp management
 - Normalized data structure
+- Hybrid storage system with database preferred, memory fallback
 
 ### Data Flow Architecture
 
